@@ -29,12 +29,6 @@ fs.readFile('input1.txt', function (err, data) {
             let char1 = lineObject.pwd.charAt(lineObject.charMin - 1);
             let char2 = lineObject.pwd.charAt(lineObject.charMax - 1);
 
-            console.log(keyChar);
-            console.log(char1);
-            console.log(char2);
-
-            console.log("-----------");
-
             if(char1 === keyChar ^ char2 === keyChar) {
                 validPwdCount = validPwdCount + 1;
             }
