@@ -4,6 +4,7 @@ var { buildSchema } = require('graphql');
 var app = express();
 var path = require('path');
 var router = express.Router();
+var parser = require('./questionaireParser.js')
 
 app.use(express.static(__dirname + '/src'));
 
@@ -19,8 +20,8 @@ var schema = buildSchema(`
 
 var root = {
     processData: (queryObject) => {
-        console.log(queryObject.data);
-        return "THIS IS THE RETURNED VALUE";
+        let answer = parser.parseQuestionaires(queryObject.data);
+        return `THE RETURNED VALUE IS ${answer}`;
     },
 };
 

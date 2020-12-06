@@ -8,6 +8,8 @@
     <textarea id="puzzleInput" rows="50" columns="50"></textarea>
     <button onclick="sendPuzzleInput()">Submit</button>
 
+    <h4>Answer</h4>
+    <p id="puzzleAnswer"></p>
 </body>
 
 <script>
@@ -20,6 +22,7 @@
         xhr.onreadystatechange = function() {
             console.log(this.status);
             console.log(this.response);
+            document.getElementById("puzzleAnswer").innerHTML = JSON.parse(this.response).data.processData;
         }
 
         xhr.send(JSON.stringify({ query: `{ processData(data:"""${puzzleInput}""") }`}));
