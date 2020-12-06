@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>Upload File</h1>
+
+    <textarea id="puzzleInput" rows="50" columns="50"></textarea>
+    <button onclick="sendPuzzleInput()">Submit</button>
+
+</body>
+
+<script>
+    function sendPuzzleInput() {
+        var puzzleInput = document.getElementById("puzzleInput").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", 'graphql/', true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function() {
+            console.log(this.status);
+            console.log(this.response);
+        }
+
+        xhr.send(JSON.stringify({ query: `{ processData(data:"${puzzleInput}") }`}));
+    }
+</script>
+
+</html>
