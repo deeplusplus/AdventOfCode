@@ -18,8 +18,8 @@ var schema = buildSchema(`
 `);
 
 var root = {
-    processData: (data) => {
-        console.log(data);
+    processData: (queryObject) => {
+        console.log(queryObject.data);
         return "THIS IS THE RETURNED VALUE";
     },
 };

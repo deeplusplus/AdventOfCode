@@ -22,7 +22,7 @@
             console.log(this.response);
         }
 
-        xhr.send(JSON.stringify({ query: `{ processData(data:"${puzzleInput}") }`}));
+        xhr.send(JSON.stringify({ query: `{ processData(data:"""${puzzleInput}""") }`}));
     }
 </script>
 
