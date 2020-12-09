@@ -1,7 +1,9 @@
 import re
 
+def bags_in_shiny_gold_bag(rules_dict):
+    return 0
+
 def bag_contains_shiny_gold(bag_name, bag_contents, rule_dict):
-    # print('Checking:', bag_name, '\nContents:', bag_contents, '\n')
     if 'shiny gold' in bag_contents:
         return True
     
@@ -23,13 +25,13 @@ def process_line_to_rule(line):
         for chunk in split_line:
             match = re.search('[0-9]', chunk)
             if match:
-                # contents.append((chunk[match.start() + 2:-1], chunk[match.start()]))
-                contents.append(chunk[match.start() + 2:-1])
+                contents.append((chunk[match.start() + 2:-1], chunk[match.start()]))
+                # contents.append(chunk[match.start() + 2:-1])
 
     return (rule_name, contents)
 
 def main():
-    file = open('input.txt')
+    file = open('testinput.txt')
     lines = file.readlines()
     rules = {}
     count = 0
@@ -39,13 +41,10 @@ def main():
         print(rule_tuple)
         rules[rule_tuple[0]] = rule_tuple[1]
 
+    print(rules)
 
-    for key, value in rules.items():
-        # print('-----------------------')
-        if bag_contains_shiny_gold(key, value, rules):
-            count += 1
+    # print(bags_in_shiny_gold_bag(rules))
 
-    print(count)
 
 if __name__ == "__main__":
     main()
