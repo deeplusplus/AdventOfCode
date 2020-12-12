@@ -1,7 +1,14 @@
 import re
 
-def bags_in_shiny_gold_bag(rules_dict):
-    return 0
+def make_bag(bag_name, rule_dict):
+    return (bag_name, rule_dict[bag_name])
+
+def make_bag_contents(a_bag, rule_dict):
+    contents = [rule_dict[a_bag[0]]]
+    for bag in rule_dict[a_bag[0]]:
+        for i in range(0, int(bag[1])):
+            contents.append(make_bag_contents(bag, rule_dict))
+    return contents
 
 def bag_contains_shiny_gold(bag_name, bag_contents, rule_dict):
     if 'shiny gold' in bag_contents:
@@ -9,10 +16,16 @@ def bag_contains_shiny_gold(bag_name, bag_contents, rule_dict):
     
     for inner_bag_name in bag_contents:
         if bag_contains_shiny_gold(inner_bag_name, rule_dict[inner_bag_name], rule_dict):
+            bag_contains_shiny_gold(inner_bag_name, rule_dict[inner_bag_name], rule_dict)
             return True
         else:
             pass
     return False
+
+def bags_in_shiny_gold_bag(rule_dict):
+    bag = make_bag('shiny gold', rule_dict)
+    bag_with_contents = make_bag_contents(bag, rule_dict)
+    return bag_with_contents
 
 
 
@@ -38,12 +51,9 @@ def main():
 
     for line in lines:
         rule_tuple = process_line_to_rule(line)
-        print(rule_tuple)
         rules[rule_tuple[0]] = rule_tuple[1]
 
-    print(rules)
-
-    # print(bags_in_shiny_gold_bag(rules))
+    print(bags_in_shiny_gold_bag(rules))
 
 
 if __name__ == "__main__":
